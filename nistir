@@ -1,0 +1,110 @@
+{
+  "type": "playbook",
+  "spec_version": "1.0",
+  "id": "playbook--nistir",
+  "name": "Playbook nistir",
+  "description": "Herramienta",
+  "playbook_types": ["conetion_bd"],
+  "created_by": "Equipo ARES I+D+i Rufner",
+  "created": "2022-02-08T19:15:00.123456Z",
+  "modified": "2022-02-08T19:15:00.123456Z",
+  "revoked": false,
+  "valid_from": "2022-02-08T19:15:00.123456Z",
+  "valid_until": "2022-12-31T23:59:59.999999Z",
+  "derived_from": ["playbook--template"],
+  "priority": 3,
+  "severity": 70,
+  "impact": 5,
+  "labels": [ "database"],
+  "external_references": [
+    {
+      "name": "Herramienta nistir",
+      "description": "Plantilla de Playbook según OASIS",
+      "source": "Plantilla de Playbook, Febrero 2022.
+       Disponible online : hxxp://www[.]example[.]com/info/fuzzypanda2021.html",
+      "url": "hxxp://www[.]example[.]com/info/fuzzypanda2020.html",
+      "url": "https://docs.oasis-open.org/cacao/security-playbooks/v1.0/cs02/security-playbooks-v1.0-cs02.html#_6y10d07nulc6",
+      "hash": "f92d8b0291653d8790907fe55c024e155e460eabb165038ace33bb7f2c1b9019",
+      "external_id": "nistir"
+    }
+  ],
+"features": {
+
+
+*Instalación de NISTIR*
+
+---------KALI_LINUX---------
+
+Actualizamos los repositorios
+*****************************
+==> sudo apt update & upgrade
+
+instalamos GIT
+**********************
+==>  sudo apt-get install git    
+==> sudo apt-get install python3.8    (instalamos python)
+		O
+==> sudo apt-get install python3.9
+
+	MYSQL
+*******************
+==> sudo wget https://dev.mysql.com/get/mysql-apt-config_0.8.15-1_all.deb
+==> sudo dpkg -i mysql-apt-config_0.8.15-1_all.deb
+	en la sigueinte ventana darle OK.
+==> sudo start mysql     ------- Iniciamos servico de mysql
+
+En mi caso instale mariadb que es compatible con kali-linux 2021_3
+	MARIADB
+*****************************
+==> sudo apt install mariadb-server
+
+iniciamos los servicios
+==> systemctl start mariadb.service  
+
+Creamos Usuario nuevo con privilegios
+***************************************
+==> sudo mysql -u root -p  ---------Ingresamos a la base de datos
+==> CREATE USER 'new_user'@'localhost' IDENTIFIED BY 'new_password';
+==> GRANT ALL PRIVILEGES ON *.* TO 'new_user'@'localhost';
+==> FLUSH PRIVILEGES;
+
+
+MySQL Workbench (optional)
+******************************
+
+
+	  Python3-pip
+	***************
+==> sudo apt-get install python3
+==> sudo apt --fix-broken install  .... (si da error ejecutar)
+==> sudo apt-get install python3.9
+==> sudo apt-get install python3-pip
+==> sudo apt-get install python3-tk
+
+
+
+	Wireshark (tshark) 3.4.4+
+      *****************************
+==> sudo apt-get install tshark
+
+LIBpcap
+***********
+==> sudo apt-get install tcpdump
+
+
+	INSTALAR MUD-PD
+*******************************
+==> git clone https://github.com/usnistgov/MUD-PD.git
+==> cd MUD-PD
+==> pip3 install -r requirements.txt
+      si da error, descargar nuevamente el "requirements.txt" ==> wget https://github.com/usnistgov/MUD-PD/blob/master/requirements.txt
+==> pip3 install -r requirements.txt
+
+INSTALAMOS MUDDY
+***********************************
+==> git clone https://github.com/usnistgov/muddy
+
+      ejecutar mudpy
+***************************
+==>python3 mudpy.py
+Se ejecutara una ventana, y desde esa ventana crearemos base de datos.
